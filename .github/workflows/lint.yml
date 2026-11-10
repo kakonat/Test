@@ -1,0 +1,13 @@
+name: Lint Bash                 # το όνομα του pipeline (ό,τι θες)
+
+on: [push]                      # πότε τρέχει: σε κάθε push
+
+jobs:                           # η λίστα των εργασιών
+  shellcheck:                   # όνομα της εργασίας (ό,τι θες)
+    runs-on: ubuntu-latest      # σε ποιο μηχάνημα τρέχει (δωρεάν Linux VM του GitHub)
+    steps:                      # τα βήματα, με τη σειρά
+      - uses: actions/checkout@v4   # βήμα 1: κατεβάζει τον κώδικά σου στο VM
+      - name: Run ShellCheck        # βήμα 2: τρέχει τον ελεγκτή
+        run: |
+          sudo apt-get install -y shellcheck   # εγκαθιστά το shellcheck
+          shellcheck *.sh                      # ελέγχει ΟΛΑ τα .sh αρχεία
